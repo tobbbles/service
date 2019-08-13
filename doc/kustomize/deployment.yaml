@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service
+  labels:
+    app: service
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: service
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+      labels:
+        app: service
+    spec:
+      imagePullSecrets:
+        - name: pinbottler
+      containers:
+        - name: bot
+          image: your-organization/service:latest
+          imagePullPolicy: IfNotPresent
+#          env:
+#            - name: DISCORD_CLIENT_SECRET
+#              valueFrom:
+#                secretKeyRef:
+#                  name: discord-client
+#                  key: client_secret
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi

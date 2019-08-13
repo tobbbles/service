@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  labels:
+    app: service
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  selector:
+    app: service
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

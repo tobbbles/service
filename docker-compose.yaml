@@ -1,0 +1,18 @@
+version: "3"
+services:
+
+  service:
+    container_name: service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - X=Y
+    networks:
+      - service
+
+networks:
+  service:
+    driver: bridge
