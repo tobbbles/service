@@ -28,12 +28,9 @@ spec:
         - name: bot
           image: your-organization/service:latest
           imagePullPolicy: IfNotPresent
-#          env:
-#            - name: DISCORD_CLIENT_SECRET
-#              valueFrom:
-#                secretKeyRef:
-#                  name: discord-client
-#                  key: client_secret
+          env:
+            - name: ENVIRONEMENT
+              value: environment
           resources:
             limits:
               cpu: 100m
